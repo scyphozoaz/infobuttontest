@@ -24,21 +24,21 @@
             infobutton.style.backgroundImage='url()';
             infobutton.style.borderRadius='10px';
             setTimeout(()=>{
-                infobutton.style.width='40vw';
-                infobutton.style.height='40vh';
-                infobutton.style.opacity='60%';
+                infobutton.style.width='50vw';
+                infobutton.style.height='30vh';
+                infobutton.style.backgroundColor='rgba(0, 0, 0, 0.5)';
                 infotext.removeAttribute('hidden');
-            }, 100)
+            }, 120)
             expanded = true;
         } else {
             infobutton.style.width='5vw';
             infobutton.style.height='5vw';
             infotext.setAttribute('hidden', '');
-            infobutton.style.opacity='100%';
             setTimeout(()=>{
+                infobutton.style.backgroundColor='black';
                 infobutton.style.backgroundImage='url(i.png)';
                 infobutton.style.borderRadius='100%';
-            }, 150)
+            }, 120)
             expanded = false;
         }
     }
