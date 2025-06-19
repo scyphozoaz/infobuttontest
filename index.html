@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="infostyle.css">
+</head>
+<body>
+<button id="infobutton" onclick='toggle()'>
+    <p id="infotext" hidden>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Nulla ullamcorper urna quis hendrerit sodales. 
+        Mauris urna risus, rutrum at ullamcorper nec, condimentum vel sem. 
+        Nunc id lacinia ex, ut dignissim enim. 
+        Praesent a nisl odio. In ornare nisi ante, in laoreet sem molestie ut. 
+    </p>
+</button>
+
+<script>
+    infobutton = document.getElementById('infobutton');
+    infotext = document.getElementById('infotext');
+    expanded = false;
+    function toggle(){
+        if (!expanded){
+            infobutton.style.backgroundImage='url()';
+            infobutton.style.borderRadius='10px';
+            setTimeout(()=>{
+                infobutton.style.width='40vw';
+                infobutton.style.height='40vh';
+                infobutton.style.opacity='60%';
+                infotext.removeAttribute('hidden');
+            }, 100)
+            expanded = true;
+        } else {
+            infobutton.style.width='5vw';
+            infobutton.style.height='5vw';
+            infotext.setAttribute('hidden', '');
+            infobutton.style.opacity='100%';
+            setTimeout(()=>{
+                infobutton.style.backgroundImage='url(i.png)';
+                infobutton.style.borderRadius='100%';
+            }, 150)
+            expanded = false;
+        }
+    }
+</script>
+
+</body>
+</html>
