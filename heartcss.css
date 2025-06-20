@@ -2,7 +2,8 @@
   position: absolute;
   width: 216px;
   height: 200px;
-  margin-top: 10px;
+  bottom:25px;
+  right:25px;
   transition-duration: 200ms;
   background:transparent;
   border:none;
