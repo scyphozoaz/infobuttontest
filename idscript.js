@@ -64,13 +64,13 @@
                     infotext.style.fontSize='200%';
                     infotext.innerHTML = 'Name: Colobus Monkey <br> Scientific Name: Colobus <br> Type: Mammal (primate) <br> Diet: Leaves, fruits, flowers <br> Habitat: Forests of Central and East Africa';
                 } else if (id === 'spidermonkey') {
-                    infotext.style.fontSize='200%';
+                    infotext.style.fontSize='175%';
                     infotext.innerHTML = 'Name: Black-Handed Spider Monkey <br> Scientific Name: Ateles geoffroyi <br> Type: Mammal (primate) <br> Diet: Leaves, fruits, flowers <br> Habitat: Tropical forests of Central America';
                 } else if (id === 'macaque'){
                     infotext.style.fontSize='175%';
                     infotext.innerHTML = 'Name: Japanese Macaque <br> Scientific Name: Macaca fuscata <br> Type: Mammal (primate) <br> Diet: Fruits, leaves, seeds, insects <br> Habitat: Mountains and forests of Japan (Honshu, Shikoku, Kyushu)';
                 } else if (id === 'bison') {
-                    infotext.style.fontSize='200%';
+                    infotext.style.fontSize='175%';
                     infotext.innerHTML = 'Name: American Bison <br> Scientific Name: Bison bison <br> Type: Mammal <br> Diet: Grasses, herbs <br> Habitat: Plains and prairies of North America';
                 } else if (id === 'prariedog') {
                     infotext.style.fontSize='200%';
