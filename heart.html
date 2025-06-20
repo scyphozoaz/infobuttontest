@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="infostyle.css">
+</head>
+<body>
+
+<button id="heart" onclick="like()"></button>
+
+<script>
+    heart = document.getElementById('heart');
+    liked = false;
+    function like(){
+        heart.style.setProperty('--pseudocolor', 'red');
+        if (liked){
+            heart.classList.add('shaking')
+            setTimeout(()=>{
+                heart.classList.remove('shaking')
+            }, 500)
+        } else {
+            liked = true;
+        }
+    }   
+</script>
+
+</body>
+</html>
