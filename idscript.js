@@ -20,7 +20,6 @@
                 } else if (id === 'bullfrog') {
                     infotext.innerHTML = 'Name: African Bullfrog <br> Scientific Name: Pyxicephalus adspersus <br> Type: Amphibian <br> Diet: Invertebrates, lizards, birds, small mammals <br> Habitat: Dry and moist savanna, shrubland';
                     infotext.style.fontSize='175%';
-                    infotext.style.paddingTop='2vw';
                 } else if (id === 'dartfrog') {
                     infotext.style.fontSize='200%';
                     infotext.innerHTML = 'Name: Dyeing Poison Dart Frog <br> Scientific Name: Dendrobates tinctorius <br> Type: Amphibian <br> Diet: Insectivore <br> Habitat: Tropical forests';
