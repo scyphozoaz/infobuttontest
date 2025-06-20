@@ -37,7 +37,6 @@
                     infotext.innerHTML = 'Name: Green Iguana <br> Scientific Name: Iguana iguana <br> Type: Reptile <br> Diet: Herbivore <br> Habitat: Tropical Forests';
                 } else if (id === 'redfoot') {
                     infotext.style.fontSize='175%';
-                    infotext.style.paddingTop='2vw';
                     infotext.innerHTML = 'Name: Red-Footed Tortoise <br> Scientific Name: Chelonoidis carbonaria <br> Type: Reptile <br> Diet: Primarily herbivores <br> Habitat: Dry and wet forests, grasslands, savannas';
                 } else if (id === 'flamingo') {
                     infotext.style.fontSize='200%';
@@ -56,7 +55,7 @@
                     infotext.style.fontSize='175%';
                     infotext.innerHTML = 'Name: Penguin <br> Scientific Name: Spheniscidae <br> Type: Bird <br> Diet: Fish, squid, krill <br> Habitat: Antarctic and sub-Antarctic regions, coastal areas';
                 } else if (id === 'lemur') {
-                    infotext.style.fontSize='200%';
+                    infotext.style.fontSize='175%';
                     infotext.innerHTML = 'Name: Ring-Tailed Lemur <br> Scientific Name: Lemur catta <br> Type: Mammal (primate) <br> Diet: Fruits, leaves, flowers <br> Habitat: Forests and scrublands of Madagascar';
                 } else if (id === 'polarbear') {
                     infotext.style.fontSize='200%';
