@@ -48,6 +48,7 @@
                 } else if (id === 'spidermonkey') {
                     infotext.innerHTML = 'Name: Black-Handed Spider Monkey <br> Scientific Name: Ateles geoffroyi <br> Type: Mammal (primate) <br> Diet: Leaves, fruits, flowers <br> Habitat: Tropical forests of Central America';
                 } else if (id === 'macaque'){
+                    infotext.style.paddingTop = '2vh';
                     infotext.innerHTML = 'Name: Japanese Macaque <br> Scientific Name: Macaca fuscata <br> Type: Mammal (primate) <br> Diet: Fruits, leaves, seeds, insects <br> Habitat: Mountains and forests of Japan (Honshu, Shikoku, Kyushu)';
                 } else if (id === 'bison') {
                     infotext.innerHTML = 'Name: American Bison <br> Scientific Name: Bison bison <br> Type: Mammal <br> Diet: Grasses, herbs <br> Habitat: Plains and prairies of North America';
