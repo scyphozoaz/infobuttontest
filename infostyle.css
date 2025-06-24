@@ -2,7 +2,7 @@
     position:absolute;
     border:2px solid black;
     bottom:10vh;
-    left:2vh;
+    left:2vw;
     width:5vw;
     height:5vw;
     border-radius: 100%;
@@ -23,10 +23,24 @@
     top:0;
     position:absolute;
     text-align:start;
-    padding-top:2vh;
+    padding-top:3vh;
     padding-left:2vw;
     padding-right:2vw;
+    font-size:3vh;
     color:white;
     font-family: DotGothic16;
 }
 
+#callbutton{
+    position:absolute;
+    border:2px solid black;
+    bottom:2vh;
+    left:2vh;
+    width:5vw;
+    height:5vw;
+    border-radius: 100%;
+    background-color: black;
+    background-image: url(speaker.png);
+    background-size: cover;
+    transition-duration: 200ms;
+}
