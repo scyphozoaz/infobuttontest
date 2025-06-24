@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>よくある質問（統合HTML版）</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+    #faq-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #37a641;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    #faq-button:hover {
+      background-color: #2e8d35;
+    }
+
+    #faq-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #faq-content {
+      background-color: #fff;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80%;
+      overflow-y: auto;
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .faq-category {
+      font-weight: bold;
+      margin: 10px 0;
+      cursor: pointer;
+      border-bottom: 1px solid #ccc;
+      padding: 8px;
+    }
+    .faq-item {
+      margin-left: 15px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+    .faq-answer {
+      display: none;
+      margin-left: 30px;
+      font-size: 14px;
+      color: #333;
+    }
+
+@media (max-width: 480px) {
+  #faq-button {
+    font-size: 18px;
+    padding: 16px 24px;
+  }
+  .faq-category {
+    font-size: 40px;
+    padding: 16px;
+  }
+  .faq-item {
+    font-size: 36px;
+    margin-left: 20px;
+  }
+  .faq-answer {
+    font-size: 34px;
+    margin-left: 25px;
+  }
+  .close-btn {
+    font-size: 30px;
+  }
+}
+  </style>
+</head>
+<body>
+<button id="faq-button">FAQ</button>
+<div id="faq-modal" style="display: none;">
+<div id="faq-content">
+<div class="close-btn" id="faq-close">✖</div>
+<div id="faq-list"></div>
+</div>
+</div>
+<script>const faqData = [
+  {
+    "category": "General Information",
+    "questions": [
+      {
+        "q": "Where is Ueno Zoo located?",
+        "a": "Ueno Zoo is located at 9-83 Ueno Park, Taito-ku, Tokyo, Japan."
+      },
+      {
+        "q": "What are the opening hours?",
+        "a": "The zoo is open from 9:30 AM to 5:00 PM (last admission at 4:00 PM)."
+      },
+      {
+        "q": "When is the zoo closed?",
+        "a": "It is closed on Mondays (or the next weekday if Monday is a holiday) and during the New Year holidays."
+      },
+      {
+        "q": "How much is admission?",
+        "a": "Adults: \u00a5600, Junior high students: \u00a5200, Seniors (65+): \u00a5300, Children under elementary school age: Free."
+      }
+    ]
+  },
+  {
+    "category": "Access",
+    "questions": [
+      {
+        "q": "What is the nearest station?",
+        "a": "JR Ueno Station (Park Exit) is a 5-minute walk away. Tokyo Metro Ginza and Hibiya Lines are about 10 minutes away on foot."
+      },
+      {
+        "q": "How do I get to Ueno Zoo from Narita Airport?",
+        "a": "Take the Keisei Skyliner to Keisei Ueno Station, which takes about 40 minutes."
+      }
+    ]
+  },
+  {
+    "category": "Language Support",
+    "questions": [
+      {
+        "q": "Is English support available?",
+        "a": "Yes, English signs, maps, and pamphlets are available. Some staff speak basic English."
+      },
+      {
+        "q": "Is there Wi-Fi?",
+        "a": "Free Wi-Fi (UENO Free Wi-Fi) is available in parts of the zoo."
+      },
+      {
+        "q": "Is there an English website?",
+        "a": "Yes, visit https://www.tokyo-zoo.net/english/ueno/."
+      }
+    ]
+  },
+  {
+    "category": "Highlights",
+    "questions": [
+      {
+        "q": "What animals are famous at Ueno Zoo?",
+        "a": "The giant pandas (Ri Ri and Shin Shin) are the most famous. Other highlights include gorillas, elephants, polar bears, and the shoebill."
+      },
+      {
+        "q": "Do I need a reservation to see the pandas?",
+        "a": "At peak times, yes. Panda viewing may require a timed-entry ticket or reservation."
+      }
+    ]
+  },
+  {
+    "category": "Tickets",
+    "questions": [
+      {
+        "q": "Can I buy tickets online?",
+        "a": "Yes. However, most reservation sites are in Japanese. You may ask your hotel or a travel agent for help."
+      },
+      {
+        "q": "Can I buy tickets at the entrance?",
+        "a": "Yes, you can purchase tickets on-site."
+      }
+    ]
+  },
+  {
+    "category": "Facilities",
+    "questions": [
+      {
+        "q": "Is the zoo accessible for wheelchairs and strollers?",
+        "a": "Yes. Wheelchairs are free with ID (limited supply). Strollers can be rented for \u00a5500/day."
+      },
+      {
+        "q": "Are there restaurants inside?",
+        "a": "Yes. There are snack stands and small restaurants. Vegetarian options are limited."
+      },
+      {
+        "q": "Are restrooms available?",
+        "a": "Yes, with multipurpose restrooms in some areas."
+      }
+    ]
+  },
+  {
+    "category": "Etiquette & Safety",
+    "questions": [
+      {
+        "q": "Can I feed the animals?",
+        "a": "No. Feeding animals is strictly prohibited."
+      },
+      {
+        "q": "Is photography allowed?",
+        "a": "Yes, but flash photography is restricted in some areas."
+      },
+      {
+        "q": "Are there garbage bins?",
+        "a": "There are few. Visitors are encouraged to take their trash with them."
+      }
+    ]
+  },
+  {
+    "category": "What to Bring",
+    "questions": [
+      {
+        "q": "What should I bring when visiting the zoo?",
+        "a": "Bring seasonal items like sunscreen, a hat, insect repellent, bottled water, small change for vending machines, and possibly an umbrella."
+      }
+    ]
+  }
+];
+
+  function toggleFAQ() {
+    const modal = document.getElementById("faq-modal");
+    modal.style.display = (modal.style.display === "flex" || modal.style.display === "") ? "none" : "flex";
+  }
+
+  document.getElementById("faq-button").addEventListener("click", toggleFAQ);
+  document.getElementById("faq-close").addEventListener("click", toggleFAQ);
+
+  function createFAQ(data) {
+    const listContainer = document.getElementById("faq-list");
+    listContainer.innerHTML = '';
+    data.forEach((category, i) => {
+      const catDiv = document.createElement("div");
+      catDiv.className = "faq-category";
+      catDiv.textContent = "📘 " + category.category;
+      catDiv.onclick = () => {
+        const section = document.getElementById("cat-" + i);
+        section.style.display = section.style.display === "block" ? "none" : "block";
+      };
+      listContainer.appendChild(catDiv);
+
+      const questionContainer = document.createElement("div");
+      questionContainer.id = "cat-" + i;
+      questionContainer.style.display = "none";
+
+      category.questions.forEach(q => {
+        const item = document.createElement("div");
+        item.className = "faq-item";
+        item.textContent = q.q;
+
+        const answer = document.createElement("div");
+        answer.className = "faq-answer";
+        answer.textContent = q.a;
+
+        item.onclick = () => {
+          answer.style.display = answer.style.display === "block" ? "none" : "block";
+        };
+
+        item.appendChild(answer);
+        questionContainer.appendChild(item);
+      });
+
+      listContainer.appendChild(questionContainer);
+    });
+  }
+
+  createFAQ(faqData);
+</script>
+</body>
+</html>
