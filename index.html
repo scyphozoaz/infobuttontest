@@ -28,8 +28,10 @@
                 infobutton.style.width='50vw';
                 infobutton.style.height='30vh';
                 infobutton.style.backgroundColor='rgba(0, 0, 0, 0.5)';
-                infotext.removeAttribute('hidden');
             }, 120)
+            setTimeout(()=>{
+                infotext.removeAttribute('hidden');
+            }, 200)
             expanded = true;
         } else {
             infobutton.style.width='5vw';
