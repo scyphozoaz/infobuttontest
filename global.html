@@ -14,15 +14,25 @@
     </head>
     <body>
         <div id="testbox">nothing yet</div>
+        <div id="status">playing</div>
+        
     </body>
     <script>
-        window.addEventListener("message", receiveMessage, false);
+        window.addEventListener("message", receiveMessage, true);
         textbox = document.getElementById('testbox')
         function receiveMessage(event){
                 raw = event.data
                 response = JSON.parse(raw);
                 if (response.origin.name !== 'HiHaHoJSApi'){
                     return;
+                }
+                if (response.type === 'onTime'){
+                    playing = response.vars.isPlaying;
+                    if (playing){
+                        status.innerText = 'playing'
+                    } else {
+                        status.innerText = 'stopped'
+                    }
                 }
                 if (response.triggerName === "frame_interaction_post_message" & response.data.type === 'textedit'){
                     textbox.innerText = response.data.text;
