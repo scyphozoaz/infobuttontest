@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #testbox{
+                position:absolute;
+                top:5vh;
+                left:5vw;
+                color:greenyellow;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size:20pt;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="testbox">nothing yet</div>
+    </body>
+    <script>
+        window.addEventListener("message", receiveMessage, false);
+        textbox = document.getElementById('testbox')
+        function receiveMessage(event){
+                raw = event.data
+                response = JSON.parse(raw);
+                if (response.origin.name !== 'HiHaHoJSApi'){
+                    return;
+                }
+                if (response.triggerName === "frame_interaction_post_message" & response.data.type === 'textedit'){
+                    textbox.innerText = response.data.text;
+                }
+            }
+    </script>
+</html>
