@@ -13,7 +13,7 @@
         </style>
     </head>
     <body>
-        <div id="testbox">nothing yett</div>
+        <div id="testbox">nothing yet</div>
         <div id="status">playing</div>
         
     </body>
@@ -32,13 +32,13 @@
                     if (response.type === 'onTime'){
                         playing = response.vars.isPlaying;
                         if (playing){
-                            status.innerText = 'playing'
+                            status.innerHTML = 'playing'
                         } else {
-                            status.innerText = 'stopped'
+                            status.innerHTML = 'stopped'
                         }
                     }
                     if (response.triggerName === "frame_interaction_post_message" & response.triggerData.data.type === 'textedit'){
-                        textbox.innerText = response.triggerData.data.text;
+                        textbox.innerHTML = response.triggerData.data.text;
                 }
             }
         })
