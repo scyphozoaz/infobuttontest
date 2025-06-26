@@ -13,31 +13,34 @@
         </style>
     </head>
     <body>
-        <div id="testbox">nothing yett</div>
+        <div id="testbox">nothing yet</div>
         <div id="status">playing</div>
         
     </body>
     <script>
-        window.addEventListener("message", receiveMessage, true);
-        textbox = document.getElementById('testbox')
-        playing=false;
-        function receiveMessage(event){
-                raw = event.data
-                response = JSON.parse(raw);
-                if (response.origin.name !== 'HiHaHoJSApi'){
-                    return;
-                }
-                if (response.type === 'onTime'){
-                    playing = response.vars.isPlaying;
-                    if (playing){
-                        status.innerText = 'playing'
-                    } else {
-                        status.innerText = 'stopped'
+        document.addEventListener("DOMContentLoaded", () => {
+            window.addEventListener("message", receiveMessage, true);
+            textbox = document.getElementById('testbox')
+            playing=false;
+            textbox.innerText = innerframetext;
+            function receiveMessage(event){
+                    raw = event.data
+                    response = JSON.parse(raw);
+                    if (response.origin.name !== 'HiHaHoJSApi'){
+                        return;
                     }
-                }
-                if (response.triggerName === "frame_interaction_post_message" & response.triggerData.data.type === 'textedit'){
-                    textbox.innerText = response.triggerData.data.text;
+                    if (response.type === 'onTime'){
+                        playing = response.vars.isPlaying;
+                        if (playing){
+                            status.innerText = 'playing'
+                        } else {
+                            status.innerText = 'stopped'
+                        }
+                    }
+                    if (response.triggerName === "frame_interaction_post_message" & response.triggerData.data.type === 'textedit'){
+                        textbox.innerText = response.triggerData.data.text;
                 }
             }
+        }
     </script>
 </html>
