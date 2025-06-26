@@ -13,7 +13,7 @@
         </style>
     </head>
     <body>
-        <div id="testbox">nothing yet</div>
+        <div id="testbox">nothing yett</div>
         <div id="status">playing</div>
         
     </body>
@@ -22,7 +22,6 @@
             window.addEventListener("message", receiveMessage, true);
             textbox = document.getElementById('testbox')
             playing=false;
-            textbox.innerText = innerframetext;
             function receiveMessage(event){
                     raw = event.data
                     response = JSON.parse(raw);
