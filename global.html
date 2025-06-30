@@ -18,11 +18,22 @@
         
     </body>
     <script>
+        window.addEventListener('load', function(){
+            const hello = {
+                event: "pusher:connection_established",
+                channel: 'this.name',
+                data: {activity_timeout:1000, socket_id:''},
+                origin: {name:'HiHaHoJSApi', client:true}
+            }
+            console.log(hello)
+            window.parent.postMessage(hello,'*');
+        })
         window.addEventListener("message", receiveMessage, false);
         textbox = document.getElementById('testbox')
         playing=false;
         function receiveMessage(event){
                 raw = event.data
+                console.log(raw)
                 response = JSON.parse(raw);
                 if (response.origin.name !== 'HiHaHoJSApi'){
                     return;
