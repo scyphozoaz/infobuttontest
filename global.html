@@ -19,14 +19,22 @@
     </body>
     <script>
         source = 'https://player.hihaho.com/embed/38ab3228-05c1-4d7c-8f46-ba89325965b6?api=true'
+        test = document.getElementById('testbox')
         window.addEventListener('load', function(){
-            const hello = {
-                type: 'message',
-                origin: {name:'HiHaHoJSApi', client:true}
-            }
-            console.log(hello)
-            window.parent.postMessage(hello,source);
+            loadDoc()
         })
+
+        function loadDoc(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    test.innerHTML = this.responseText;
+                }
+            };
+            xhttp.open('GET','ajax.txt',true)
+            xhttp.send()
+        }
+
         window.addEventListener("message", receiveMessage, false);
         textbox = document.getElementById('testbox')
         playing=false;
