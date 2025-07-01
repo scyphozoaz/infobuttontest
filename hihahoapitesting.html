@@ -148,7 +148,8 @@
                         test.innerHTML = this.responseText;
                     }
                 };
-                xhttp.open('POST','ajax.txt',true)
+                target = 'https://scyphozoaz.github.io/infobuttontest/ajax.txt'
+                xhttp.open('POST','https://scyphozoaz.github.io/infobuttontest/ajax.txt',true)
                 xhttp.setRequestHeader('Content-Type', 'text/plain');
                 xhttp.send('Message Posted')
             }
