@@ -120,6 +120,7 @@
                 Probe
             </button>
         </div>
+        <div id="ajaxtest">nothinyet</div>
     </div>
         <script type="text/javascript">
             // global variables
@@ -133,6 +134,25 @@
             volumeNo = document.getElementById('vol')
             playing = false;
             muted = false;
+
+            // ajax
+            test = document.getElementById('ajaxtest');
+            window.addEventListener('load', function(){
+                loadDoc();
+            })
+        
+            function loadDoc(){
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        test.innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open('POST','ajax.txt',true)
+                xhttp.setRequestHeader('Content-Type', 'text/plain');
+                xhttp.send('Message Posted')
+            }
+
 
             // enable message listening from hihaho api and only from hihaho api, automatically detect when video is playing
             function receiveMessage(event){
