@@ -13,20 +13,19 @@
         </style>
     </head>
     <body>
-        <div id="testbox">nothing yett</div>
+        <div id="testbox">nothing yet</div>
         <div id="status">playing</div>
         
     </body>
     <script>
+        source = 'https://player.hihaho.com/embed/38ab3228-05c1-4d7c-8f46-ba89325965b6?api=true'
         window.addEventListener('load', function(){
             const hello = {
-                event: "pusher:connection_established",
-                channel: 'this.name',
-                data: {activity_timeout:1000, socket_id:''},
+                type: 'message',
                 origin: {name:'HiHaHoJSApi', client:true}
             }
             console.log(hello)
-            window.parent.postMessage(hello,'*');
+            window.parent.postMessage(hello,source);
         })
         window.addEventListener("message", receiveMessage, false);
         textbox = document.getElementById('testbox')
