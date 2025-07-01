@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #player{
+            position: absolute;
+            top: 10vh;
+            left: 25vw; 
+            width: 50vw;
+            height: 50vh;
+        }
+        .row{
+            position: absolute;
+            margin-inline:19vw;
+            text-align: center;
+            top: 65vh;
+            width: 60vw;
+            height: auto;
+            padding-top: 2.5vh;
+            padding-bottom: 2.5vh;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 5px solid black;
+        }
+        .buttons{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .buttons > button{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size:14pt;
+            border:1px solid black;
+            background-color: transparent;
+            transition-duration: 200ms;
+        }
+        .buttons > button:hover{
+            color:white;
+            cursor:grab;
+            background-color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="embed">
+        <iframe id="player"
+            loading="lazy"
+            src="https://player.hihaho.com/embed/38ab3228-05c1-4d7c-8f46-ba89325965b6?api=true"
+            webkitAllowFullScreen="true"
+            mozallowfullscreen="true"
+            allowfullscreen="allowfullscreen"
+            allow="autoplay; fullscreen; clipboard-read; clipboard-write">
+        </iframe>
+    <br>
+    <div class="row">
+        <p id="apiout">HiHaHo javascript API tester</p>
+        <p>Click a button to go to a different part of the video.</p>
+        <div class="buttons">
+            <button data-time="11.04" data-key="seekTo">
+                🗺️ 
+            </button>
+            <button data-time="17.8" data-key="seekTo">
+                🦎
+            </button>
+            <button data-time="113.1" data-key="seekTo">
+                🦩 
+            </button>
+            <button data-time="127.95" data-key="seekTo">
+                🦤
+            </button>
+            <button data-time="144.48" data-key="seekTo">
+                🦏
+            </button>
+            <button data-time="167.11" data-key="seekTo">
+                🦒
+            </button>
+            <button data-time="188.43" data-key="seekTo">
+                🐧
+            </button>
+            <button data-time="219.99" data-key="seekTo">
+                🇲🇬
+            </button>
+            <button data-time="270.74" data-key="seekTo">
+                🐻‍❄️
+            </button>
+            <button data-time="296.77" data-key="seekTo">
+                🐒
+            </button>
+            <button data-time="342.91" data-key="seekTo">
+                🦬
+            </button>
+            <button data-time="375.88" data-key="seekTo">
+                🐘
+            </button>
+            <button data-time="395.73" data-key="seekTo">
+                🦅
+            </button>
+            <button data-time="440.71" data-key="seekTo">
+                🐅
+            </button>
+            <button data-time="485.49" data-key="seekTo">
+                🦍
+            </button>
+        </div>
+        <br>
+        <div class="buttons">
+            <button id='pausebutton' data-key="pause">
+                Pause
+            </button>
+            <button id="mutebutton" data-key="mute">
+                Mute
+            </button>
+            <button>
+                <input type='range' id="volumeslider">
+                <label for="volumeslider">Volume: <output id="vol">50</output></label>
+            </button>
+            <button onclick="reachIn()">
+                Probe
+            </button>
+        </div>
+    </div>
+        <script type="text/javascript">
+            // global variables
+            window.addEventListener("message", receiveMessage, false);
+            listener = document.getElementById('apiout')
+            iframe = document.getElementById('player')
+            source = iframe.src;
+            pausebutton = document.getElementById('pausebutton')
+            mutebutton = document.getElementById('mutebutton')
+            volumeslider = document.getElementById('volumeslider')
+            volumeNo = document.getElementById('vol')
+            playing = false;
+            muted = false;
+
+            // enable message listening from hihaho api and only from hihaho api, automatically detect when video is playing
+            function receiveMessage(event){
+                raw = event.data
+                response = JSON.parse(raw);
+                if (response.origin.name !== 'HiHaHoJSApi'){
+                    return;
+                }
+                console.log(raw);
+                if (response.type === 'onTime'){
+                    playing = response.vars.isPlaying;
+                    muted = (response.vars.volume == 0);
+                    if (playing){
+                        pausebutton.innerText = 'Pause'
+                        pausebutton.dataset.key = 'pause'
+                    } else {
+                        pausebutton.innerText = 'Play'
+                        pausebutton.dataset.key = 'play'
+                    }
+                    if (muted){
+                        mutebutton.innerText = 'Unmute'
+                        mutebutton.dataset.key = 'unMute'
+                    } else {
+                        mutebutton.innerText = 'Mute'
+                        mutebutton.dataset.key = 'mute'
+                    }
+                }
+            }
+            
+            // event listener for volume slider functionality
+            volumeslider.addEventListener('input', (event) => {
+                volumeNo.innerText = event.target.value;
+                const payload = {
+                    type: 'setVolume',
+                    volume: Number(event.target.value),
+                    origin: {name:'HiHaHoJSApi', client:true}
+                }    
+                iframe.contentWindow.postMessage(payload, source)
+            })
+
+            //attach event listeners to every button to use message functions
+            nodes = document.querySelectorAll('.buttons')
+            for(const node of nodes){
+                node.addEventListener('click', (event) => {
+                if(event.target.tagName === 'BUTTON' & event.target.dataset.key !== undefined){
+                    const payload = {
+                        type: event.target.dataset.key,
+                        origin: {name:'HiHaHoJSApi', client:true}
+                    }
+                    if (event.target.dataset.key === 'mute') {
+                        volumeslider.setAttribute('hidden', '')
+                        volumeNo.innerText = 'Muted'
+                    }
+                    if (event.target.dataset.key === 'unMute') {
+                        volumeslider.removeAttribute('hidden')
+                        volumeNo.innerText = volumeslider.value;
+                    }
+                    if (event.target.dataset.time !== undefined) {payload.sec = Number(event.target.dataset.time)}
+                    if (event.target.dataset.volume !== undefined) {payload.sec = Number(event.target.dataset.time)}
+                    iframe.contentWindow.postMessage(payload, source)
+                }
+            })
+            }
+
+            function reachIn(){
+                inner = iframe.contentWindow;
+                target = inner.querySelector('iframe[src=https://scyphozoaz.github.io/infobuttontest/global.html]')
+                targetDoc = target.contentWindow;
+                targetDoc.getElementById('testbox')
+                targetDoc.innerText = 'wawa'
+            }
+
+        </script>
+</body>
+</html>
